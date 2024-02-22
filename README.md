@@ -1,6 +1,8 @@
-# ticketbooking
+# Ticket Booking APP Clone
 
-A new Flutter project.
+참고
+[Flutter 3.10.0 Master Class for Beginners to Advanced | Ticket Booking App Development Tutorial
+https://www.youtube.com/watch?v=71AsYo2q_0Y&t=2047s](https://www.dbestech.com/tutorials/flutter-ticket-booking-app)
 
 ## Getting Started
 
