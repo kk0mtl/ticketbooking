@@ -1,10 +1,15 @@
 import 'package:fluentui_icons/fluentui_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:ticketbooking/screen/hotel_screen.dart';
+import 'package:ticketbooking/screen/ticket_view.dart';
+import 'package:ticketbooking/utils/app_info_list.dart';
 import 'package:ticketbooking/utils/app_styles.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+  const HomeScreen({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -13,9 +18,10 @@ class HomeScreen extends StatelessWidget {
       body: ListView(
         children: [
           Container(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 70),
+            padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Column(
               children: [
+                const Gap(70),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -38,7 +44,6 @@ class HomeScreen extends StatelessWidget {
                           image: const DecorationImage(
                             image: AssetImage('assets/images/usericon.png'),
                           )),
-                      child: const Text(''),
                     ),
                   ],
                 ),
@@ -87,6 +92,47 @@ class HomeScreen extends StatelessWidget {
                 ),
                 const Gap(5),
               ],
+            ),
+          ),
+          const Gap(15),
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            padding: const EdgeInsets.only(left: 20),
+            child: Row(
+              children: ticketList
+                  .map((singleTicket) => TicketView(ticket: singleTicket))
+                  .toList(),
+            ),
+          ),
+          const Gap(35),
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Text(
+                  'Hotel',
+                  style: Styles.titleStyle3,
+                ),
+                InkWell(
+                  onTap: () {
+                    print('view all-2 is tapped');
+                  },
+                  child: Text(
+                    'View All',
+                    style: Styles.textStyleWithOpacity,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            padding: const EdgeInsets.only(left: 20),
+            child: Row(
+              children:
+                  hotelList.map((hotel) => HotelScreen(hotel: hotel)).toList(),
             ),
           ),
         ],

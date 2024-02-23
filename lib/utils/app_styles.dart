@@ -5,9 +5,15 @@ Color primary = const Color.fromARGB(240, 236, 239, 241);
 class Styles {
   static Color primaryColor = primary;
   static Color textColor = Colors.black;
-  static Color orangeColor = const Color(0x0ff26799);
+  static Color orangeColor = const Color(0xfff37b67);
   static Color indigoColor = Colors.indigo;
   static Color greyColor = Colors.blueGrey;
+
+  static TextStyle smallTextStyle = TextStyle(
+    fontSize: 14,
+    color: textColor,
+    fontWeight: FontWeight.w400,
+  );
 
   static TextStyle textStyle = TextStyle(
     fontSize: 16,
@@ -32,11 +38,11 @@ class Styles {
   static TextStyle titleStyle3 = TextStyle(
     fontSize: 22,
     color: textColor,
-    fontWeight: FontWeight.bold,
+    fontWeight: FontWeight.w600,
   );
   static TextStyle titleStyle4 = TextStyle(
     fontSize: 18,
     color: textColor,
-    fontWeight: FontWeight.bold,
+    fontWeight: FontWeight.w500,
   );
 }
