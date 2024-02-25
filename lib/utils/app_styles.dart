@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-Color primary = const Color.fromARGB(240, 236, 239, 241);
+Color primary = const Color.fromARGB(255, 235, 234, 240);
 
 class Styles {
   static Color primaryColor = primary;
@@ -8,6 +8,8 @@ class Styles {
   static Color orangeColor = const Color(0xfff37b67);
   static Color indigoColor = Colors.indigo;
   static Color greyColor = Colors.blueGrey;
+  static Color boxGrey = const Color.fromARGB(255, 224, 229, 233);
+  static Color boxWhite = const Color.fromARGB(232, 244, 246, 247);
 
   static TextStyle smallTextStyle = TextStyle(
     fontSize: 14,

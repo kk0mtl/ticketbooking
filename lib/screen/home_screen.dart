@@ -4,7 +4,9 @@ import 'package:gap/gap.dart';
 import 'package:ticketbooking/screen/hotel_screen.dart';
 import 'package:ticketbooking/screen/ticket_view.dart';
 import 'package:ticketbooking/utils/app_info_list.dart';
+import 'package:ticketbooking/utils/app_layout.dart';
 import 'package:ticketbooking/utils/app_styles.dart';
+import 'package:ticketbooking/widgets/title_viewall_widget.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({
@@ -18,10 +20,12 @@ class HomeScreen extends StatelessWidget {
       body: ListView(
         children: [
           Container(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
+            padding: EdgeInsets.symmetric(
+                horizontal: AppLayout.getWidth(20),
+                vertical: AppLayout.getHeight(20)),
             child: Column(
               children: [
-                const Gap(70),
+                Gap(AppLayout.getHeight(50)),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -48,7 +52,7 @@ class HomeScreen extends StatelessWidget {
                   ],
                 ),
                 //Gap을 이용해 간편하게 SizedBox 구현
-                const Gap(25),
+                Gap(AppLayout.getHeight(25)),
                 Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
@@ -62,7 +66,7 @@ class HomeScreen extends StatelessWidget {
                         FluentSystemIcons.ic_fluent_search_regular,
                         color: Styles.indigoColor,
                       ),
-                      const Gap(5),
+                      Gap(AppLayout.getHeight(5)),
                       Text(
                         'Search',
                         style: Styles.textStyleWithOpacity,
@@ -70,61 +74,32 @@ class HomeScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-                const Gap(40),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Text(
-                      'Upcomming Flights',
-                      style: Styles.titleStyle3,
-                    ),
-                    InkWell(
-                      onTap: () {
-                        print('view all is tapped');
-                      },
-                      child: Text(
-                        'View All',
-                        style: Styles.textStyleWithOpacity,
-                      ),
-                    ),
-                  ],
+                Gap(AppLayout.getHeight(40)),
+                const TitleViewall(
+                  title: 'Upcomming Flights',
                 ),
-                const Gap(5),
+                Gap(AppLayout.getHeight(5)),
               ],
             ),
           ),
-          const Gap(15),
+          Gap(AppLayout.getHeight(15)),
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             padding: const EdgeInsets.only(left: 20),
             child: Row(
               children: ticketList
-                  .map((singleTicket) => TicketView(ticket: singleTicket))
+                  .map((singleTicket) => TicketView(
+                        ticket: singleTicket,
+                        isColored: true,
+                      ))
                   .toList(),
             ),
           ),
-          const Gap(35),
+          Gap(AppLayout.getHeight(35)),
           Container(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Text(
-                  'Hotel',
-                  style: Styles.titleStyle3,
-                ),
-                InkWell(
-                  onTap: () {
-                    print('view all-2 is tapped');
-                  },
-                  child: Text(
-                    'View All',
-                    style: Styles.textStyleWithOpacity,
-                  ),
-                ),
-              ],
+            padding: EdgeInsets.symmetric(horizontal: AppLayout.getWidth(20)),
+            child: const TitleViewall(
+              title: 'Hotels',
             ),
           ),
           SingleChildScrollView(
