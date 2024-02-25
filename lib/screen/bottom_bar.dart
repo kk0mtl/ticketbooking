@@ -1,6 +1,7 @@
 import 'package:fluentui_icons/fluentui_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:ticketbooking/screen/home_screen.dart';
+import 'package:ticketbooking/screen/profile_screen.dart';
 import 'package:ticketbooking/screen/search_screen.dart';
 import 'package:ticketbooking/screen/ticket_screen.dart';
 import 'package:ticketbooking/utils/app_styles.dart';
@@ -18,7 +19,7 @@ class _BottomBarState extends State<BottomBar> {
     const HomeScreen(),
     const SearchScreen(),
     const TicketScreen(),
-    const Text('Profile'),
+    const ProfileScreen(),
   ];
 
   void _onItemTap(int index) {
@@ -57,8 +58,8 @@ class _BottomBarState extends State<BottomBar> {
             label: 'Search',
           ),
           BottomNavigationBarItem(
-            icon: Icon(FluentSystemIcons.ic_fluent_calendar_regular),
-            activeIcon: Icon(FluentSystemIcons.ic_fluent_calendar_filled),
+            icon: Icon(FluentSystemIcons.ic_fluent_ticket_regular),
+            activeIcon: Icon(FluentSystemIcons.ic_fluent_ticket_filled),
             label: 'Calendar',
           ),
           BottomNavigationBarItem(

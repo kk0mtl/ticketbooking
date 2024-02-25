@@ -90,7 +90,6 @@ class HomeScreen extends StatelessWidget {
               children: ticketList
                   .map((singleTicket) => TicketView(
                         ticket: singleTicket,
-                        isColored: true,
                       ))
                   .toList(),
             ),

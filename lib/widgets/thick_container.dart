@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 class ThickContainer extends StatelessWidget {
-  final bool isColored;
+  final bool? isColored;
   const ThickContainer({
     super.key,
-    required this.isColored,
+    this.isColored,
   });
 
   @override

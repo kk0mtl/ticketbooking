@@ -1,23 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:get/get.dart';
 import 'package:ticketbooking/utils/app_layout.dart';
 import 'package:ticketbooking/utils/app_styles.dart';
+import 'package:ticketbooking/widgets/chain.dart';
 import 'package:ticketbooking/widgets/thick_container.dart';
 
 class TicketView extends StatelessWidget {
   final Map<String, dynamic> ticket;
-  final bool isColored;
+
+  // uncolored card => isColored를 null로 입력
+  final bool? isColored;
+
   const TicketView({
     super.key,
     required this.ticket,
-    required this.isColored,
+    this.isColored,
   });
 
   @override
   Widget build(BuildContext context) {
+    final bool? colorInput = isColored;
     final size = AppLayout.getSize(context);
-    var textColor = isColored ? Colors.white : Colors.black;
-    var smallText = isColored
+    var textColor = isColored == null ? Colors.white : Colors.black;
+    var smallText = isColored == null
         ? Styles.smallTextStyle.copyWith(
             color: textColor,
           )
@@ -25,15 +31,16 @@ class TicketView extends StatelessWidget {
 
     return SizedBox(
       width: size.width * 0.85,
-      height: AppLayout.getHeight(200),
+      height: AppLayout.getHeight(GetPlatform.isAndroid == true ? 199 : 201),
       child: Container(
-        margin: EdgeInsets.only(right: AppLayout.getHeight(20)),
+        margin: EdgeInsets.only(right: AppLayout.getHeight(15)),
         child: Column(
+          mainAxisSize: MainAxisSize.min,
           children: [
             //blue part of ticket
             Container(
               decoration: BoxDecoration(
-                  color: isColored ? Styles.indigoColor : Colors.white,
+                  color: isColored == null ? Styles.indigoColor : Colors.white,
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(AppLayout.getHeight(20)),
                     topRight: Radius.circular(AppLayout.getHeight(20)),
@@ -54,8 +61,8 @@ class TicketView extends StatelessWidget {
                         ),
                       ),
                       const Spacer(),
-                      const ThickContainer(
-                        isColored: true,
+                      ThickContainer(
+                        isColored: colorInput,
                       ),
                       Expanded(
                         child: Stack(
@@ -65,26 +72,11 @@ class TicketView extends StatelessWidget {
                               child: LayoutBuilder(builder:
                                   (BuildContext context,
                                       BoxConstraints constraints) {
-                                return Flex(
-                                  direction: Axis.horizontal,
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: List.generate(
-                                    //디바이스 화면 크기에 따라 점선의 점 개수 달라짐
-                                    //점은 작은 SizedBox로 구현
-                                    (constraints.constrainWidth() / 7).floor(),
-                                    (index) => SizedBox(
-                                      width: 3,
-                                      height: 1,
-                                      child: DecoratedBox(
-                                          decoration: BoxDecoration(
-                                        color: isColored
-                                            ? Colors.white
-                                            : Styles.greyColor.withOpacity(0.5),
-                                      )),
-                                    ),
-                                  ),
+                                return ChainLayout(
+                                  isColored: colorInput,
+                                  width: 3,
+                                  height: 1,
+                                  time: 7,
                                 );
                               }),
                             ),
@@ -93,7 +85,7 @@ class TicketView extends StatelessWidget {
                                 angle: 1.5,
                                 child: Icon(
                                   Icons.local_airport_rounded,
-                                  color: isColored
+                                  color: isColored == null
                                       ? Colors.white
                                       : const Color.fromARGB(
                                           255, 114, 208, 216),
@@ -103,8 +95,8 @@ class TicketView extends StatelessWidget {
                           ],
                         ),
                       ),
-                      const ThickContainer(
-                        isColored: true,
+                      ThickContainer(
+                        isColored: colorInput,
                       ),
                       const Spacer(),
                       Text(
@@ -125,7 +117,7 @@ class TicketView extends StatelessWidget {
                       const Spacer(),
                       Text(
                         '${ticket['flying_time']}',
-                        style: isColored
+                        style: isColored == null
                             ? Styles.smallTextStyle.copyWith(
                                 color: textColor, fontWeight: FontWeight.w500)
                             : Styles.titleStyle4,
@@ -143,7 +135,7 @@ class TicketView extends StatelessWidget {
 
             //top part of orange ticket
             Container(
-              color: isColored ? Styles.orangeColor : Colors.white,
+              color: isColored == null ? Styles.orangeColor : Colors.white,
               child: Row(
                 children: [
                   SizedBox(
@@ -151,7 +143,9 @@ class TicketView extends StatelessWidget {
                     width: AppLayout.getWidth(10),
                     child: DecoratedBox(
                       decoration: BoxDecoration(
-                        color: isColored ? Styles.primaryColor : Colors.white,
+                        color: isColored == null
+                            ? Styles.primaryColor
+                            : Colors.white,
                         borderRadius: BorderRadius.only(
                           topRight: Radius.circular(AppLayout.getHeight(10)),
                           bottomRight: Radius.circular(AppLayout.getHeight(10)),
@@ -164,24 +158,11 @@ class TicketView extends StatelessWidget {
                       padding: EdgeInsets.all(AppLayout.getHeight(14)),
                       child: LayoutBuilder(
                         builder: (context, constraints) {
-                          return Flex(
-                            direction: Axis.horizontal,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            mainAxisSize: MainAxisSize.max,
-                            children: List.generate(
-                                (constraints.constrainWidth() / 17).floor(),
-                                (index) => SizedBox(
-                                      width: 5,
-                                      height: 1,
-                                      child: DecoratedBox(
-                                        decoration: BoxDecoration(
-                                          color: isColored
-                                              ? Colors.white
-                                              : Styles.greyColor
-                                                  .withOpacity(0.5),
-                                        ),
-                                      ),
-                                    )),
+                          return ChainLayout(
+                            width: 5,
+                            height: 1,
+                            time: 17,
+                            isColored: colorInput,
                           );
                         },
                       ),
@@ -192,7 +173,9 @@ class TicketView extends StatelessWidget {
                     width: AppLayout.getWidth(10),
                     child: DecoratedBox(
                       decoration: BoxDecoration(
-                        color: isColored ? Styles.primaryColor : Colors.white,
+                        color: isColored == null
+                            ? Styles.primaryColor
+                            : Colors.white,
                         borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(AppLayout.getHeight(10)),
                           bottomLeft: Radius.circular(AppLayout.getHeight(10)),
@@ -207,10 +190,11 @@ class TicketView extends StatelessWidget {
             //bottom part of orange ticket
             Container(
               decoration: BoxDecoration(
-                  color: isColored ? Styles.orangeColor : Colors.white,
+                  color: isColored == null ? Styles.orangeColor : Colors.white,
                   borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(AppLayout.getHeight(20)),
-                    bottomRight: Radius.circular(AppLayout.getHeight(20)),
+                    bottomLeft: Radius.circular(
+                        AppLayout.getHeight(isColored == null ? 20 : 0)),
+                    bottomRight: Radius.circular(isColored == null ? 20 : 0),
                   )),
               padding: EdgeInsets.fromLTRB(
                   AppLayout.getHeight(20),
