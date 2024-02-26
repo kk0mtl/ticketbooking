@@ -4,7 +4,7 @@ Color primary = const Color.fromARGB(255, 235, 234, 240);
 
 class Styles {
   static Color primaryColor = primary;
-  static Color textColor = Colors.black;
+  static Color textColor = const Color.fromARGB(255, 14, 14, 42);
   static Color orangeColor = const Color(0xfff37b67);
   static Color indigoColor = Colors.indigo;
   static Color greyColor = Colors.blueGrey;
